@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { uploadBytes, ref, Storage, listAll, getDownloadURL } from '@angular/fire/storage';
-import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
 import { v4 as uuidv4 } from 'uuid';
+import {collection, doc, setDoc, Firestore} from '@angular/fire/firestore';
 @Component({
   selector: 'app-cad-produtos',
   templateUrl: './cad-produtos.page.html',
@@ -13,7 +13,7 @@ export class CadProdutosPage implements OnInit {
   images:any=[]
   imgSrc:any
   isImg:boolean=false
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage, private firestore:Firestore) { }
   ngOnInit() {
     this.listarProdutos()
     console.log(uuidv4())
@@ -23,6 +23,9 @@ export class CadProdutosPage implements OnInit {
     const newName=uuidv4(this.foto.name)
     this.imageRef = ref(this.storage, `Produtos/${newName}`)
     uploadBytes(this.imageRef, this.foto)
+    setTimeout(() => {
+      this.listarProdutos()
+    }, 2000);
   }
 
   valorFormat(preco:any){
@@ -50,4 +53,15 @@ export class CadProdutosPage implements OnInit {
       });
   }
 
+  cadastrarProduto(nomeProduto:any, descProduto:any, precoProduto:any, qtdProduto:any) {
+    const produto = {
+      nome:nomeProduto,
+      descricao:descProduto,
+      preco:precoProduto,
+      qtd:qtdProduto,
+      image:this.imgSrc
+  }
+  const document = doc(collection(this.firestore, 'Produtos'));
+  return setDoc(document, produto);
+}
 }
