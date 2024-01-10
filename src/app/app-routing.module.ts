@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'cad-produtos',
     loadChildren: () => import('./Pages/cad-produtos/cad-produtos.module').then( m => m.CadProdutosPageModule)
+  },
+  {
+    path: 'edit-produtos',
+    loadChildren: () => import('./Pages/edit-produtos/edit-produtos.module').then( m => m.EditProdutosPageModule)
   }
 
 ];
