@@ -16,6 +16,8 @@ export class AppComponent {
 
   public adminPages = [
     { title: 'Cadastrar Produtos', url: '/cad-produtos', icon: 'bag-add' },
+    { title: 'Editar Produtos', url: '/edit-produtos', icon: 'create' },
+    { title: 'Deletar Produtos', url: '/delete-produtos', icon: 'trash' },
   ];
   constructor() {}
 }
