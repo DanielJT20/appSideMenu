@@ -1,12 +1,14 @@
+<ion-buttons slot="start">
+  <ion-menu-button></ion-menu-button>
+</ion-buttons>
 <ion-content>
-  <h1>Lista de produtos</h1>
+  <h1>Produtos</h1>
   <ion-card *ngFor="let p of produtos">
-    <img src="{{p.image}}"/>
+    <img src={{p.image}}/>
     <ion-card-header>
-      <ion-card-title>{{p.preco}}</ion-card-title>
+      <ion-card-title><div class="pcort">R$ {{p.preco.replace('.',',')}}</div><div class="desconto"> -30% R$ {{((p.preco-(p.preco*0.3)).toFixed(2)).replace('.',',')}}</div></ion-card-title>
       <ion-card-subtitle>{{p.nome}}</ion-card-subtitle>
     </ion-card-header>
-  
     <ion-card-content>
       {{p.descricao}}
     </ion-card-content>

@@ -18,6 +18,7 @@
 
 </ion-content> -->
 
+
 <ion-toolbar>
   <ion-buttons slot="start">
     <ion-menu-button></ion-menu-button>
@@ -42,14 +43,15 @@
       <ion-input fill="outline" placeholder="nome do produto" #productName> <ion-icon slot="start" name="lock-closed"
           aria-hidden="true"></ion-icon></ion-input>
       <ion-input fill="outline" placeholder="descrição do produto" #productDescript></ion-input>
-      <ion-input fill="outline" placeholder="preço do produto" #preco (keyup)="valorFormat($event.target)"></ion-input>
+      <ion-input fill="outline" value='{{preco1}}' #preco (keyup)="valorFormat($event.target)"></ion-input>
       <ion-input fill="outline" type="number" placeholder="quantidade estoque" #Qtd></ion-input>
       <ion-button fill="outline" expand="block" id="open-modal"><ion-thumbnail><img
             src="../../../assets/logos/googleLogo.png"></ion-thumbnail>Foto do produto</ion-button>
 
       <img *ngIf="isImg" src={{imgSrc}} class="imgSrc">
 
-      <ion-button expand="block" (click)="cadastrarProduto(productName.value, productDescript.value, preco.value, Qtd.value)">Cadastrar</ion-button>
+      <ion-button expand="block"
+        (click)="cadastrarProduto(productName.value,productDescript.value,preco.value,Qtd.value)">Cadastrar</ion-button>
 
     </form>
 
@@ -68,9 +70,9 @@
     <ion-content>
       <div class="block">
         <h3>Selecione a imagem do produto</h3>
-
-        <ion-input type="file" (change)="carregarFoto($event)" label="Imagem" label-placement="floating" fill="solid"
-          placeholder="Selecione a imagem do produto"></ion-input>
+        <button (click)="hideShow()">Selecione a imagem</button>
+        <input id="cadImg" type="file" (change)="carregarFoto($event)" label="Imagem" label-placement="floating"
+          fill="solid" placeholder="Selecione a imagem do produto" />
 
         <div class="images">
           <ion-card *ngFor="let img of images" (click)="selectImage(img, modal)">
