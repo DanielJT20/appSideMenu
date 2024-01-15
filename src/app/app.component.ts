@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut } from '@angular/fire/auth';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -19,5 +20,44 @@ export class AppComponent {
     { title: 'Editar Produtos', url: '/edit-produtos', icon: 'create' },
     { title: 'Deletar Produtos', url: '/delete-produtos', icon: 'trash' },
   ];
-  constructor() {}
+
+
+  mensagem: string = ''
+  logado: boolean = false
+  isToastOpen = false
+  user:any={nome:'',foto:''}
+  setOpen(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
+
+  logout() {
+    this.mensagem = 'LogOut efetuado com sucesso!'
+    this.setOpen(true)
+    this.logado = !this.logado
+    this.logOutComGoogle()
+  }
+  loginComGoogle() {
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(this.auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        this.mensagem = `Usuário: ${result.user.displayName} logado com sucesso!`
+        this.user.nome=result.user.displayName
+        this.user.foto=result.user.photoURL
+        this.setOpen(true)
+        this.logado = !this.logado
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  }
+  logOutComGoogle(){
+    return signOut(this.auth)
+  }
+  constructor(private auth: Auth) { }
+
+
+
 }

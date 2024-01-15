@@ -1,0 +1,43 @@
+ion-img{
+    width: 120px;
+}
+form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+}
+.block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+ion-icon{
+    font-size: 25px;
+}
+ion-input{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    background-color: rgb(242, 242, 242);
+    border-radius: 7px;
+    margin-bottom: 12px;
+}
+ion-textarea{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    background-color: rgb(242, 242, 242);
+    border-radius: 7px;
+    margin-bottom: 12px;
+}
+ion-button{
+    padding: 0;
+    height: 7px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
